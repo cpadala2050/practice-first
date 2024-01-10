@@ -1,0 +1,8 @@
+name:   Listener
+on: issues
+jobs:
+  listens:
+    runs-on: ubuntu-latest
+    steps:
+      - name : Info of the event
+        run : echo "${{toJson(github)}}"
