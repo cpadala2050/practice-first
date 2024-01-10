@@ -10,10 +10,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Install dependencies
-        run:  npm@5 ci
       - name: Run Lint
-        run: npm@5 run lint
+        run: npm run lint
       - name: Lint process 
         run : echo "Done with lint as part of workflow"
   tests:
