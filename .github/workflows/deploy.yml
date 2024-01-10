@@ -1,0 +1,51 @@
+name: Deployment process
+on:  push
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run:  npm ci
+      - name: Run Lint
+        run: npm run lint
+      - name: Lint process 
+        run : echo "Done with lint as part of workflow"
+  tests:
+    needs:  lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run:  npm ci
+      - name: Test Project
+        run : npm test
+      - name: Complete Tests
+        run : echo "Executed tests as part of workflow"
+  build:
+    needs:  tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run:  npm ci
+      - name: Test Project
+        run : npm run build
+      - name: Deploying 
+        run : echo "Done with Deploying project as part of workflow"
+        
